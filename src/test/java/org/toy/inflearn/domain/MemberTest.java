@@ -1,12 +1,8 @@
-package org.toy.inflearn;
+package org.toy.inflearn.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.toy.inflearn.domain.Member;
-import org.toy.inflearn.domain.MemberStatus;
-import org.toy.inflearn.domain.PasswordEncoder;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -29,7 +25,7 @@ class MemberTest {
             }
         };
 
-        member = Member.create("abc@naver.com", "ABC", "secret", passwordEncoder);
+        member = Member.create(new MemberCreateRequest("abc@naver.com", "ABC", "secret"), passwordEncoder);
     }
 
     @Test
@@ -87,6 +83,28 @@ class MemberTest {
         assertThat(member.getNickname()).isEqualTo("가나다");
     }
 
-    
+    @Test
+    void 비밀번호_바꾸기() {
+        member.changePassword("1q2w3e4r", passwordEncoder);
+        
+        assertThat(member.verifyPassword("1q2w3e4r", passwordEncoder)).isTrue();
+    }
+
+    @Test
+    void 상태_확인() {
+        member.activate();
+
+        assertThat(member.isActive()).isTrue();
+
+        member.deactivate();
+
+        assertThat(member.isActive()).isFalse();
+    }
+
+    @Test
+    void 이메일주소_검증() {
+        assertThatThrownBy(() -> Member.create(new MemberCreateRequest("anwnlro", "abc", "1q2w3e4r"), passwordEncoder))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 
 }
