@@ -62,13 +62,13 @@ class MemberTest {
 
     @Test
     void 비밀번호_검증() {
-        assertThat(member.verifyPassword("secret", passwordEncoder)).isTrue();
+        assertThat(member.verifyPassword("1q2w3e4r", passwordEncoder)).isTrue();
         assertThat(member.verifyPassword("hello", passwordEncoder)).isFalse();
     }
 
     @Test
     void 닉네임_바꾸기() {
-        assertThat(member.getNickname()).isEqualTo("ABC");
+        assertThat(member.getNickname()).isEqualTo("abc");
 
         member.changeNickname("가나다");
 
