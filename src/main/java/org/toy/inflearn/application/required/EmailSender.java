@@ -1,5 +1,6 @@
 package org.toy.inflearn.application.required;
 
+import org.springframework.stereotype.Component;
 import org.toy.inflearn.domain.Email;
 
 /**
