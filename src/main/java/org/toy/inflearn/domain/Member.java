@@ -16,10 +16,11 @@ import static org.springframework.util.Assert.state;
         @UniqueConstraint(name = "UK_MEMBER_EMAIL_ADDRESS", columnNames = "email_address")
 )
 @Getter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @NaturalIdCache
 public class Member extends AbstractEntity {
+
     @Embedded
     @NaturalId
     private Email email;
@@ -33,6 +34,9 @@ public class Member extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     @Column(length = 50, nullable = false)
     private MemberStatus status;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private MemberDetail detail;
 
     public static Member register(MemberRegisterRequest registerRequest, PasswordEncoder passwordEncoder) {
         Member member = new Member();
