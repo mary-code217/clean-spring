@@ -1,6 +1,6 @@
-package org.toy.inflearn.application.required;
+package org.toy.inflearn.application.member.required;
 
-import org.toy.inflearn.domain.Email;
+import org.toy.inflearn.domain.shared.Email;
 
 /**
  * 이메일을 발송한다.

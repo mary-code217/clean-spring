@@ -1,4 +1,4 @@
-package org.toy.inflearn.domain;
+package org.toy.inflearn.domain.member;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NaturalIdCache;
+import org.toy.inflearn.domain.AbstractEntity;
+import org.toy.inflearn.domain.shared.Email;
 
 import static java.util.Objects.requireNonNull;
 import static org.springframework.util.Assert.state;

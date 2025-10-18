@@ -1,4 +1,4 @@
-package org.toy.inflearn.domain;
+package org.toy.inflearn.domain.member;
 
 import org.springframework.stereotype.Component;
 

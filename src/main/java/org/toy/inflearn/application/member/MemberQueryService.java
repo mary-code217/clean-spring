@@ -1,12 +1,12 @@
-package org.toy.inflearn.application;
+package org.toy.inflearn.application.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import org.toy.inflearn.application.provided.MemberFinder;
-import org.toy.inflearn.application.required.MemberRepository;
-import org.toy.inflearn.domain.Member;
+import org.toy.inflearn.application.member.provided.MemberFinder;
+import org.toy.inflearn.application.member.required.MemberRepository;
+import org.toy.inflearn.domain.member.Member;
 
 @Service
 @Transactional

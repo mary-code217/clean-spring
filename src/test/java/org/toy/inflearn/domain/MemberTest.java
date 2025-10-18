@@ -2,6 +2,9 @@ package org.toy.inflearn.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.toy.inflearn.domain.member.Member;
+import org.toy.inflearn.domain.member.MemberStatus;
+import org.toy.inflearn.domain.member.PasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
