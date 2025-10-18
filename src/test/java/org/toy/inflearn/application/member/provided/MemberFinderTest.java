@@ -1,4 +1,4 @@
-package org.toy.inflearn.application.provided;
+package org.toy.inflearn.application.member.provided;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.toy.inflearn.SplearnTestConfiguration;
-import org.toy.inflearn.domain.Member;
+import org.toy.inflearn.domain.member.Member;
 import org.toy.inflearn.domain.MemberFixture;
 
 import static org.assertj.core.api.Assertions.assertThat;

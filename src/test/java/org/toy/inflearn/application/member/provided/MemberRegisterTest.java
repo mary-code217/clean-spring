@@ -1,4 +1,4 @@
-package org.toy.inflearn.application.provided;
+package org.toy.inflearn.application.member.provided;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -8,6 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.toy.inflearn.SplearnTestConfiguration;
 import org.toy.inflearn.domain.*;
+import org.toy.inflearn.domain.member.DuplicateEmailException;
+import org.toy.inflearn.domain.member.Member;
+import org.toy.inflearn.domain.member.MemberRegisterRequest;
+import org.toy.inflearn.domain.member.MemberStatus;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

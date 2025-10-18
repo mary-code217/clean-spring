@@ -1,14 +1,18 @@
-package org.toy.inflearn.application;
+package org.toy.inflearn.application.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import org.toy.inflearn.application.provided.MemberFinder;
-import org.toy.inflearn.application.provided.MemberRegister;
-import org.toy.inflearn.application.required.EmailSender;
-import org.toy.inflearn.application.required.MemberRepository;
-import org.toy.inflearn.domain.*;
+import org.toy.inflearn.application.member.provided.MemberFinder;
+import org.toy.inflearn.application.member.provided.MemberRegister;
+import org.toy.inflearn.application.member.required.EmailSender;
+import org.toy.inflearn.application.member.required.MemberRepository;
+import org.toy.inflearn.domain.member.DuplicateEmailException;
+import org.toy.inflearn.domain.member.Member;
+import org.toy.inflearn.domain.member.MemberRegisterRequest;
+import org.toy.inflearn.domain.member.PasswordEncoder;
+import org.toy.inflearn.domain.shared.Email;
 
 @Service
 @Transactional

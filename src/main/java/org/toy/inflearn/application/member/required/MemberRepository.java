@@ -1,8 +1,8 @@
-package org.toy.inflearn.application.required;
+package org.toy.inflearn.application.member.required;
 
 import org.springframework.data.repository.Repository;
-import org.toy.inflearn.domain.Email;
-import org.toy.inflearn.domain.Member;
+import org.toy.inflearn.domain.shared.Email;
+import org.toy.inflearn.domain.member.Member;
 
 import java.util.Optional;
 

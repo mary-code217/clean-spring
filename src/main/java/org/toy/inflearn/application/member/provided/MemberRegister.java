@@ -1,8 +1,8 @@
-package org.toy.inflearn.application.provided;
+package org.toy.inflearn.application.member.provided;
 
 import jakarta.validation.Valid;
-import org.toy.inflearn.domain.Member;
-import org.toy.inflearn.domain.MemberRegisterRequest;
+import org.toy.inflearn.domain.member.Member;
+import org.toy.inflearn.domain.member.MemberRegisterRequest;
 
 /**
  * 회원의 등록과 관련된 기능을 제공한다.

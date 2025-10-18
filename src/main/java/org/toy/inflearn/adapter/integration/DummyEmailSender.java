@@ -2,8 +2,8 @@ package org.toy.inflearn.adapter.integration;
 
 import org.springframework.context.annotation.Fallback;
 import org.springframework.stereotype.Component;
-import org.toy.inflearn.application.required.EmailSender;
-import org.toy.inflearn.domain.Email;
+import org.toy.inflearn.application.member.required.EmailSender;
+import org.toy.inflearn.domain.shared.Email;
 
 @Component
 @Fallback

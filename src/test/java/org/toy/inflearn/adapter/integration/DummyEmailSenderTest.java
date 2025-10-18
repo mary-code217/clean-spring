@@ -3,7 +3,7 @@ package org.toy.inflearn.adapter.integration;
 import org.junit.jupiter.api.Test;
 import org.junitpioneer.jupiter.StdIo;
 import org.junitpioneer.jupiter.StdOut;
-import org.toy.inflearn.domain.Email;
+import org.toy.inflearn.domain.shared.Email;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

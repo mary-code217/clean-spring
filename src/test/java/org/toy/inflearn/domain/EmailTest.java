@@ -1,6 +1,7 @@
 package org.toy.inflearn.domain;
 
 import org.junit.jupiter.api.Test;
+import org.toy.inflearn.domain.shared.Email;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

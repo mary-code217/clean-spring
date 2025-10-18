@@ -2,9 +2,9 @@ package org.toy.inflearn;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.toy.inflearn.application.required.EmailSender;
+import org.toy.inflearn.application.member.required.EmailSender;
 import org.toy.inflearn.domain.MemberFixture;
-import org.toy.inflearn.domain.PasswordEncoder;
+import org.toy.inflearn.domain.member.PasswordEncoder;
 
 @TestConfiguration
 public class SplearnTestConfiguration {

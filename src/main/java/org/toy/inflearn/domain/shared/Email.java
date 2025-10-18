@@ -1,4 +1,4 @@
-package org.toy.inflearn.domain;
+package org.toy.inflearn.domain.shared;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
