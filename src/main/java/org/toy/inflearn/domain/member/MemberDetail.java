@@ -1,7 +1,6 @@
 package org.toy.inflearn.domain.member;
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +11,9 @@ import org.toy.inflearn.domain.AbstractEntity;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Table(uniqueConstraints = {
+        @UniqueConstraint(name = "UK_MEMBER_DETAIL_PROFILE_ADDRESS", columnNames = "profile_address")
+})
 @Entity
 @Getter
 @ToString(callSuper=true)
@@ -20,8 +22,10 @@ public class MemberDetail extends AbstractEntity {
     @Embedded
     private Profile profile;
 
+    @Column(columnDefinition = "TEXT")
     private String introduction;
 
+    @Column(nullable = false)
     private LocalDateTime registeredAt;
 
     private LocalDateTime activatedAt;

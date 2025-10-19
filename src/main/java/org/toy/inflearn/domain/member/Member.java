@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NaturalIdCache;
+import org.springframework.util.Assert;
 import org.toy.inflearn.domain.AbstractEntity;
 import org.toy.inflearn.domain.shared.Email;
 
@@ -16,8 +17,10 @@ import static java.util.Objects.requireNonNull;
 import static org.springframework.util.Assert.state;
 
 @Entity
-@Table(name = "MEMBER", uniqueConstraints =
-        @UniqueConstraint(name = "UK_MEMBER_EMAIL_ADDRESS", columnNames = "email_address")
+@Table(name = "MEMBER", uniqueConstraints = {
+        @UniqueConstraint(name = "UK_MEMBER_EMAIL_ADDRESS", columnNames = "email_address"),
+        @UniqueConstraint(name = "UK_MEMBER_DETAIL_ID", columnNames = "detail_id")
+    }
 )
 @Getter
 @ToString(callSuper = true, exclude = "detail")
@@ -73,11 +76,9 @@ public class Member extends AbstractEntity {
         return passwordEncoder.matches(password, this.passwordHash);
     }
 
-    public void changeNickname(String nickname) {
-        this.nickname = requireNonNull(nickname);
-    }
-
     public void updateInfo(MemberInfoUpdateRequest updateRequest) {
+        Assert.state(this.status == MemberStatus.ACTIVE, "등록 완료 상태가 아니면 정보를 수정할 수 없습니다.");
+
         this.nickname = Objects.requireNonNull(updateRequest.nickname());
 
         this.detail.updateInfo(updateRequest);
