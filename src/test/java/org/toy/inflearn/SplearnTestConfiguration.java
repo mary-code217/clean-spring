@@ -3,7 +3,7 @@ package org.toy.inflearn;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.toy.inflearn.application.member.required.EmailSender;
-import org.toy.inflearn.domain.MemberFixture;
+import org.toy.inflearn.domain.member.MemberFixture;
 import org.toy.inflearn.domain.member.PasswordEncoder;
 
 @TestConfiguration

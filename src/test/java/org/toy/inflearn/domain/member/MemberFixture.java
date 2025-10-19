@@ -1,7 +1,4 @@
-package org.toy.inflearn.domain;
-
-import org.toy.inflearn.domain.member.MemberRegisterRequest;
-import org.toy.inflearn.domain.member.PasswordEncoder;
+package org.toy.inflearn.domain.member;
 
 public class MemberFixture {
 
