@@ -8,10 +8,7 @@ import org.toy.inflearn.application.member.provided.MemberFinder;
 import org.toy.inflearn.application.member.provided.MemberRegister;
 import org.toy.inflearn.application.member.required.EmailSender;
 import org.toy.inflearn.application.member.required.MemberRepository;
-import org.toy.inflearn.domain.member.DuplicateEmailException;
-import org.toy.inflearn.domain.member.Member;
-import org.toy.inflearn.domain.member.MemberRegisterRequest;
-import org.toy.inflearn.domain.member.PasswordEncoder;
+import org.toy.inflearn.domain.member.*;
 import org.toy.inflearn.domain.shared.Email;
 
 @Service
@@ -43,6 +40,24 @@ public class MemberModifyService implements MemberRegister {
         Member member = memberFinder.find(memberId);
 
         member.activate();
+
+        return memberRepository.save(member);
+    }
+
+    @Override
+    public Member deactivate(Long memberId) {
+        Member member = memberFinder.find(memberId);
+
+        member.deactivate();
+
+        return memberRepository.save(member);
+    }
+
+    @Override
+    public Member updateInfo(Long memberId, MemberInfoUpdateRequest memberInfoUpdateRequest) {
+        Member member = memberFinder.find(memberId);
+
+        member.updateInfo(memberInfoUpdateRequest);
 
         return memberRepository.save(member);
     }

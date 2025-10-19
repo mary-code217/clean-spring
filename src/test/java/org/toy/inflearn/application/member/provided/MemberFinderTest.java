@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.toy.inflearn.SplearnTestConfiguration;
 import org.toy.inflearn.domain.member.Member;
-import org.toy.inflearn.domain.MemberFixture;
+import org.toy.inflearn.domain.member.MemberFixture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
