@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.toy.inflearn.domain.member.MemberFixture.createMemberRegisterRequest;
 import static org.toy.inflearn.domain.member.MemberFixture.createPasswordEncoder;
 
@@ -71,15 +72,6 @@ class MemberTest {
     }
 
     @Test
-    void 닉네임_바꾸기() {
-        assertThat(member.getNickname()).isEqualTo("abc");
-
-        member.changeNickname("가나다");
-
-        assertThat(member.getNickname()).isEqualTo("가나다");
-    }
-
-    @Test
     void 비밀번호_바꾸기() {
         member.changePassword("1q2w3e4r", passwordEncoder);
         
@@ -114,6 +106,14 @@ class MemberTest {
         assertThat(member.getNickname()).isEqualTo(request.nickname());
         assertThat(member.getDetail().getProfile().address()).isEqualTo(request.profileAddress());
         assertThat(member.getDetail().getIntroduction()).isEqualTo(request.introduction());
+    }
+
+    @Test
+    void 업데이트_인포_실패() {
+        assertThatThrownBy(() -> {
+                var request = new MemberInfoUpdateRequest("anwlnro", "anwnlro0001", "자기소개");
+                member.updateInfo(request);
+        }).isInstanceOf(IllegalStateException.class);
     }
 
 }
