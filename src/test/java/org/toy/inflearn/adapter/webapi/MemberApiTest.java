@@ -3,57 +3,60 @@ package org.toy.inflearn.adapter.webapi;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.assertj.core.api.AssertProvider;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.http.HttpStatus;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.json.JsonPathValueAssert;
 import org.springframework.test.web.servlet.assertj.MockMvcTester;
-import org.toy.inflearn.application.member.provided.MemberRegister;
+import org.springframework.test.web.servlet.assertj.MvcTestResult;
+import org.springframework.transaction.annotation.Transactional;
+import org.toy.inflearn.adapter.webapi.dto.MemberRegisterResponse;
+import org.toy.inflearn.application.member.required.MemberRepository;
 import org.toy.inflearn.domain.member.Member;
 import org.toy.inflearn.domain.member.MemberFixture;
 import org.toy.inflearn.domain.member.MemberRegisterRequest;
+import org.toy.inflearn.domain.member.MemberStatus;
 
+import java.io.UnsupportedEncodingException;
+import java.util.function.Consumer;
+
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.toy.inflearn.AssertThatUtils.equalsTo;
+import static org.toy.inflearn.AssertThatUtils.notNull;
 
-@WebMvcTest(MemberApi.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+@Transactional
 @RequiredArgsConstructor
-class MemberApiTest {
-
-    @MockitoBean
-    private MemberRegister memberRegister;
-
+public class MemberApiTest {
     final MockMvcTester mvcTester;
     final ObjectMapper objectMapper;
+    final MemberRepository memberRepository;
 
     @Test
-    void 생성_api_테스트() throws JsonProcessingException {
-        Member member = MemberFixture.createMember(1L);
-        when(memberRegister.register(any())).thenReturn(member);
-
+    void register() throws JsonProcessingException, UnsupportedEncodingException {
         MemberRegisterRequest request = MemberFixture.createMemberRegisterRequest();
         String requestJson = objectMapper.writeValueAsString(request);
 
-        assertThat(mvcTester.post().uri("/api/members").contentType(MediaType.APPLICATION_JSON)
-                .content(requestJson))
+        MvcTestResult result = mvcTester.post().uri("/api/members").contentType(MediaType.APPLICATION_JSON)
+                .content(requestJson).exchange();
+
+        assertThat(result)
                 .hasStatusOk()
                 .bodyJson()
-                .extractingPath("$.memberId").asNumber().isEqualTo(1);
+                .hasPathSatisfying("$.memberId", notNull())
+                .hasPathSatisfying("$.email", equalsTo(request));
 
-        verify(memberRegister).register(request);
-    }
+        MemberRegisterResponse response =
+                objectMapper.readValue(result.getResponse().getContentAsString(), MemberRegisterResponse.class);
+        Member member = memberRepository.findById(response.memberId()).orElseThrow();
 
-    @Test
-    void 생성_api_실패_테스트() throws JsonProcessingException {
-        MemberRegisterRequest request = MemberFixture.createMemberRegisterRequest("1q2w3e4r");
-        String requestJson = objectMapper.writeValueAsString(request);
-
-        assertThat(mvcTester.post().uri("/api/members").contentType(MediaType.APPLICATION_JSON)
-                .content(requestJson))
-                .hasStatus(HttpStatus.BAD_REQUEST);
+        assertThat(member.getEmail().address()).isEqualTo(request.email());
+        assertThat(member.getNickname()).isEqualTo(request.nickname());
+        assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
     }
 }
